@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1 id="title">Let's Math</h1>
+    <div id="time">Time</div>
+    <div id="info">
+        <p id="score">0</p>
+        <p id="level">0</p>
+    </div>
+    <div id="calculation"></div>
+    <div id="result"></div>
+    <div id="choose">
+        <button id="true" value="true" onclick="check1()">true</button>
+        <button id="false" value ="false" onclick="check2()">false</button>
+    </div>
+    <script>
+        let score = 0;
+        let level = 1;
+        let time = 10;
+        let fullTime = 10;
+        start();
+
+        function getRandomNumber() {
+            return Math.floor(Math.random() * 10 * level);
+        }
+        function getRandomOperator() {
+            let operators = ["+", "-"];
+            return operators[Math.floor(Math.random() * operators.length)]
+        }
+        function getMath() {
+            let num1 = getRandomNumber();
+            let num2 = getRandomNumber();
+            let operator = getRandomOperator();
+            let math = num1 + " " + operator + " " + num2;
+            document.getElementById("calculation").innerHTML = math;
+            document.getElementById("result").innerHTML = getRandomResult();
+        }
+        getMath()
+        function getRandomResult() {
+            let randomResult = Math.random() >= 0.5;
+            if(randomResult) {
+                return getResult();
+            } else {
+                return getFakeResult();
+            }
+        }
+        function getResult() {
+            let math2 = document.getElementById("calculation").innerHTML;
+            return eval(math2)
+        }
+        getRandomResult()
+        function getFakeResult() {
+            let fakeResult = Math.floor(Math.random() * 10 * level);
+            while (fakeResult !== getResult()) {
+                return fakeResult;
+            }
+        }
+        function check1() {
+            let result2 = Number(document.getElementById("result").innerHTML);
+            let check = document.getElementById("true");
+            check = false;
+            if (result2 === getResult()) {
+                check = true;
+                nextLevel();
+            } else {
+                gameOver();
+            }
+        }
+        function check2() {
+            let result2 = Number(document.getElementById("result").innerHTML);
+            let check = document.getElementById("false");
+            check = false;
+            if (result2 !== getResult()) {
+                check = true;
+                nextLevel();
+            } else {
+                gameOver();
+            }
+        }
+
+        function nextLevel() {
+            level = level + 1;
+            score = score + 1;
+            time = fullTime;
+            document.getElementById("level").innerHTML = "Score: " + score;
+            document.getElementById("score").innerHTML = "Level: " + level;
+            getMath();
+        }
+        function gameOver() {
+            alert("GÀ VỜ NHỜ !")
+        }
+        function countDown() {
+            
+            let count = setInterval(function() {
+                time -= 0.1;
+                if (time <= 0) {
+                    clearInterval(count);
+                    gameOver();
+                }
+            }, 1000)
+            
+        }
+        function start() {
+            time = fullTime;
+            document.getElementById("score").innerHTML = "Score: " + score;
+            document.getElementById("level").innerHTML = "Level: " + level;
+            getMath();
+            countDown();
+        }
+
+
+    </script>
+</body>
+
+</html>

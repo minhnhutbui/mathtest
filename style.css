@@ -1,0 +1,41 @@
+body {
+    background-color: pink;
+}
+#title {
+    display: flex;
+    justify-content:center;
+    font-size: 50px;
+    text-transform: uppercase;
+}
+#time {
+    font-size: 20px;
+    text-transform: uppercase;
+    text-align: center;
+}
+#info {
+    display: flex;
+    justify-content: space-around;
+}
+#score, #level {
+    display:block;
+    font-size: 30px;
+}
+#calculation, #result {
+    font-size: 40px;
+    display: flex;
+    justify-content:center;
+    margin: 10px 0 20px 0;
+}
+#choose {
+    display: flex;
+    justify-content:center;
+}
+#true, #false {
+    text-transform: uppercase;
+    font-size: 20px;
+    padding: 40px;
+    background-color: #fff;
+    margin: 20px;
+    border-radius: 10px;
+    border: 1px solid rgb(41, 34, 34)
+}
